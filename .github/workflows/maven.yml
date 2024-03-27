@@ -1,0 +1,15 @@
+name: github-pipeline
+on:
+  workflow_dispatch:
+jobs:
+  Generate_Start_Timestamp:
+    name: Generate Start Timestamp
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4.1.0
+        with:
+            script: |
+              const starttimestamp = new Date().format("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+              console.log('Start timestamp: ${ env.starttimestamp } and ${currentBuild.number}')
+              env.TIMESTAMP = starttimestamp
