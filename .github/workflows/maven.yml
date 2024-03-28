@@ -10,5 +10,5 @@ jobs:
         id: date
         run: |
           echo "NOW=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
-          echo $NOW and ${{github.run_number}}
+          echo $NOW
     
