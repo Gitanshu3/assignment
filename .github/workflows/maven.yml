@@ -36,21 +36,15 @@ jobs:
           id: buildNumber
           shell: bash
           run: echo "##[set-output name=gitBuildnumber;]$(git rev-list HEAD | wc -l)"
-
-        - name: Generate Branch Version
-          id: branchversion
-          shell: bash
-          run: echo "##[set-output name=branchVersion;]$( echo ${{ env.INSTALLER_BRANCH }} | cut -d'_' -f2 )"  
           
         - name: Generate ZEBuildNumber
           id: zebuildnumber
           shell: bash
           run: |
-           echo branchversion-$(echo ${{ steps.branchversion.outputs.branchVersion }})
-           echo "::set-ouput name=zeBuildnumber::$(echo ${{ steps.branchversion.outputs.branchVersion }}_${{ steps.buildNumber.outputs.gitBuildnumber }})"
+           echo "::set-ouput name=zeBuildnumber::$(echo ${{ echo ${{ env.INSTALLER_BRANCH }} | cut -d'_' -f2 }}_${{ steps.buildNumber.outputs.gitBuildnumber }})"
         
         - name: Print ZEBuildNumber
           shell: bash
           run: |
-           echo ZEBuildNumber-${{ steps.zebuildnumber.outputs.zeBuildnumber }}
+           echo ZEBuildNumber- echo ${{ steps.zebuildnumber.outputs.zeBuildnumber }}
     
