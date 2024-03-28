@@ -46,7 +46,7 @@ jobs:
           id: zebuildnumber
           shell: bash
           run: |
-           echo branchversion-${{ steps.zebuildnumber.outputs.zeBuildnumber }}
+           echo branchversion-$(echo ${{ steps.branchversion.outputs.branchVersion }})
            echo "::set-ouput name=zeBuildnumber::$(echo ${{ steps.branchversion.outputs.branchVersion }}_${{ steps.buildNumber.outputs.gitBuildnumber }})"
         
         - name: Print ZEBuildNumber
