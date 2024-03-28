@@ -40,11 +40,9 @@ jobs:
         - name: Generate ZEBuildNumber
           id: zebuildnumber
           shell: bash
-          run: |
-           echo "::set-ouput name=zeBuildnumber::$(${{ env.INSTALLER_BRANCH }} | cut -d'_' -f2 )_${{ steps.buildNumber.outputs.gitBuildnumber }}"
+          run: echo "::set-ouput name=zeBuildnumber::$(echo ${{ env.INSTALLER_BRANCH }} | cut -d'_' -f2 )_${{ steps.buildNumber.outputs.gitBuildnumber }}"
         
         - name: Print ZEBuildNumber
           shell: bash
-          run: |
-           echo ZE Build Number: ${{ steps.zebuildnumber.outputs.zeBuildnumber }}
+          run: echo ZE Build Number:${{ steps.zebuildnumber.outputs.zeBuildnumber }}
     
