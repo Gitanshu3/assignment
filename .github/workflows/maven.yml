@@ -41,7 +41,7 @@ jobs:
           id: zebuildnumber
           shell: bash
           run: |
-           echo "{zeBuildnumber}::{ $(echo ${{ env.INSTALLER_BRANCH }} | cut -d'_' -f2)_${{ steps.buildNumber.outputs.gitBuildnumber }} }" >> $GITHUB_OUTPUT
+           echo "zeBuildnumber=$(echo ${{ env.INSTALLER_BRANCH }} | cut -d'_' -f2)_${{ steps.buildNumber.outputs.gitBuildnumber }}" >> $GITHUB_OUTPUT
         
         - name: Print ZEBuildNumber
           shell: bash
