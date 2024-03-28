@@ -41,10 +41,10 @@ jobs:
           id: zebuildnumber
           shell: bash
           run: |
-           echo "::set-ouput name=zeBuildnumber::$(echo ${{ env.INSTALLER_BRANCH }} | cut -d'_' -f2)_${{ steps.buildNumber.outputs.gitBuildnumber }}"
+           echo "{zeBuildnumber}::{ $(echo ${{ env.INSTALLER_BRANCH }} | cut -d'_' -f2)_${{ steps.buildNumber.outputs.gitBuildnumber }} }" >> $GITHUB_OUTPUT
         
         - name: Print ZEBuildNumber
           shell: bash
           run: |
-           echo ZEBuildNumber- $(echo ${{ steps.zebuildnumber.outputs.zeBuildnumber }})
+           echo ZEBuildNumber- ${{ steps.zebuildnumber.outputs.zeBuildnumber }}
     
