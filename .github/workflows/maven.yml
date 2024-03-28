@@ -44,5 +44,5 @@ jobs:
         
         - name: Print ZEBuildNumber
           shell: bash
-          run: echo ZEBuildNumber-${{ steps.zebuildnumber.outputs.zeBuildnumber }}
+          run: echo "ZEBuildNumber-${{ steps.zebuildnumber.outputs.zeBuildnumber }}"
     
