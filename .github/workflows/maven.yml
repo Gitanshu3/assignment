@@ -36,13 +36,20 @@ jobs:
           id: buildNumber
           shell: bash
           run: echo "##[set-output name=gitBuildnumber;]$(git rev-list HEAD | wc -l)"
+
+        - name: Generate Build String
+          id: zebuildstring
+          shell: bash
+          run: echo "::set-output name=zeBuildString::$(echo geetanshu)"
           
         - name: Generate ZEBuildNumber
           id: zebuildnumber
           shell: bash
-          run: echo "::set-ouput name=zeBuildnumber::$(echo ${{ env.INSTALLER_BRANCH }} | cut -d'_' -f2 )_${{ steps.buildNumber.outputs.gitBuildnumber }}"
+          run: echo '::set-ouput name=zeBuildnumber::$(echo ${{ env.INSTALLER_BRANCH }} | cut -d'_' -f2 )_${{ steps.buildNumber.outputs.gitBuildnumber }}'
         
         - name: Print ZEBuildNumber
           shell: bash
-          run: echo "ZEBuildNumber-${{ steps.zebuildnumber.outputs.zeBuildnumber }}"
+          run: |
+           echo Name ${steps.zebuildstring.outputs.zeBuildString}
+           echo "ZEBuildNumber-${{ steps.zebuildnumber.outputs.zeBuildnumber }}"
     
