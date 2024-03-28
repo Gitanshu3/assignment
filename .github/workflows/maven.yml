@@ -6,24 +6,11 @@ jobs:
     name: Generate Start Timestamp
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
-        uses: actions/checkout@v4.1.0
-        with:
-            script: |
-              const starttimestamp = new Date().format("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-              console.log('Start timestamp: ${ env.starttimestamp } and ${currentBuild.number}')
-              env.TIMESTAMP = starttimestamp
-
       - name: Get current date
         id: date
-        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
-      - name: Test with environment variables
-        run: echo $TAG_NAME - $RELEASE_NAME
+        run: echo "::set-output name=starttimestamp::$("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")"
+      - name: Store date as environment variable
         env:
-          TAG_NAME: nightly-tag-${{ steps.date.outputs.date }}
-          RELEASE_NAME: nightly-release-${{ steps.date.outputs.date }}
-      - name: Test with input
-        uses: actions/hello-world-docker-action@master
-        with:
-          who-to-greet: Mona-the-Octocat-${{ steps.date.outputs.date }}
+          STARTTIMESTAMP: ${{ steps.date.outputs.starttimestamp }}
+        run: echo "Start timestamp :" ${ env.starttimestamp } and ${currentBuild.number}   
     
