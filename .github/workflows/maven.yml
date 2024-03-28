@@ -65,4 +65,4 @@ jobs:
           run: |
            echo ${{ github.workspace }}
            ant all -Dyourchoice=4 -DbambooBuildNumber=${{github.run_number}} -DMOBILE_BUILD_SKIP=true -v -verbose   
-          working-directory: ${{ github.workspace }}
+          working-directory: ${{ github.workspace }}/build.xml
