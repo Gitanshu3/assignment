@@ -15,9 +15,10 @@ jobs:
     steps:
       - name: Get current date
         id: date
-        run: echo "STARTTIMESTAMP=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
-      - name: Echo current date
-        run: echo $STARTTIMESTAMP and ${{github.run_number}}
+        shell: bash
+        run: |
+         echo "STARTTIMESTAMP=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
+         echo $STARTTIMESTAMP and ${{github.run_number}}
 
   
   Git_Pulls:
@@ -31,13 +32,11 @@ jobs:
             repository: ${{ env.BACKEND_REPO }}
             ref: ${{ env.BACKEND_BRANCH }}
             fetch-depth: 0
+            
         - name: Generate Build Number
           id: buildNumber
           shell: bash
           run: echo "##[set-output name=gitBuildnumber;]$(git rev-list HEAD | wc -l)"
-          
-        - name: Print ZEBuildNumber
-          run: echo ${{ steps.ZEBuildNumber.outputs.ZEBuildNumber }}
           
         - name: Generate ZEBuildNumber
           id: ZEBuildNumber
@@ -45,5 +44,6 @@ jobs:
           run: echo "##[set-ouput name=ZEBuildNumber;]$(echo ${{ env.INSTALLER_BRANCH }} | cut -d'_' -f2)_${{ steps.buildNumber.outputs.gitBuildnumber }}"
         
         - name: Print ZEBuildNumber
+          shell: bash
           run: echo ${{ steps.ZEBuildNumber.outputs.ZEBuildNumber }}
     
