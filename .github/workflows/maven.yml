@@ -59,13 +59,6 @@ jobs:
           with:
             java-version: 17
             distribution: 'temurin'
-
-        - name: Checkout BackEnd Code
-          uses: actions/checkout@v2
-          with:
-            repository: ${{ env.BACKEND_REPO }}
-            ref: ${{ env.BACKEND_BRANCH }}
-            fetch-depth: 0     
     
         - name: run ant build
           run: |
