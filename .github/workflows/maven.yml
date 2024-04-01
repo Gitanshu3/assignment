@@ -25,28 +25,48 @@ jobs:
       runs-on: ubuntu-latest
       needs: Generate_Start_Timestamp
       steps:
-        - name: Checkout BackEnd Code
-          uses: actions/checkout@v2
-          with:
-            repository: ${{ env.BACKEND_REPO }}
-            ref: ${{ env.BACKEND_BRANCH }}
-            fetch-depth: 0
+      - name: Checkout BackEnd Code
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ env.BACKEND_REPO }}
+          ref: ${{ env.BACKEND_BRANCH }}
+          fetch-depth: 0
+          path: Integration/branch_integration/
+          run: echo "github workplace one ${GITHUB_WORKSPACE}" 
+
+      - name: Checkout Installer Code
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ env.BACKEND_REPO }}
+          ref: ${{ env.BACKEND_BRANCH }}
+          fetch-depth: 0
+          path: Integration/branch_integration/installer
+          run: echo "github workplace two ${GITHUB_WORKSPACE}" 
+
+      - name: Checkout FrontEnd Code
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ env.BACKEND_REPO }}
+          ref: ${{ env.BACKEND_BRANCH }}
+          fetch-depth: 0
+          path: Integration/branch_integration/fayre'
+          run: echo "github workplace three ${GITHUB_WORKSPACE}" 
             
-        - name: Generate Build Number
-          id: buildNumber
-          shell: bash
-          run: echo "##[set-output name=gitBuildnumber;]$(git rev-list HEAD | wc -l)"
-          
-        - name: Generate ZEBuildNumber
-          id: zebuildnumber
-          shell: bash
-          run: |
-           echo "zeBuildnumber=$(echo ${{ env.INSTALLER_BRANCH }} | cut -d'_' -f2)_${{ steps.buildNumber.outputs.gitBuildnumber }}" >> $GITHUB_OUTPUT
+      - name: Generate Build Number
+        id: buildNumber
+        shell: bash
+        run: echo "##[set-output name=gitBuildnumber;]$(git rev-list HEAD | wc -l)"
         
-        - name: Print ZEBuildNumber
-          shell: bash
-          run: |
-           echo ZEBuildNumber- ${{ steps.zebuildnumber.outputs.zeBuildnumber }}
+      - name: Generate ZEBuildNumber
+        id: zebuildnumber
+        shell: bash
+        run: |
+         echo "zeBuildnumber=$(echo ${{ env.INSTALLER_BRANCH }} | cut -d'_' -f2)_${{ steps.buildNumber.outputs.gitBuildnumber }}" >> $GITHUB_OUTPUT
+      
+      - name: Print ZEBuildNumber
+        shell: bash
+        run: |
+         echo ZEBuildNumber- ${{ steps.zebuildnumber.outputs.zeBuildnumber }}
 
 
   Run_ANT_Build:
@@ -63,6 +83,6 @@ jobs:
         - name: run ant build
           shell: bash
           run: |
-           echo "pwd is ${pwd}"
+           echo " workspace is ${GITHUB_WORKSPACE} "
            echo " This repo is ${{ github.repository }} .. "
            ant all -Dyourchoice=4 -DbambooBuildNumber=${{github.run_number}} -DMOBILE_BUILD_SKIP=true -v -verbose   
