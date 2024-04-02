@@ -85,7 +85,7 @@ jobs:
             distribution: 'temurin'
     
         - name: run ant build
-          working-directory: ./
+          working-directory: ${GITHUB_WORKSPACE}/Integration/branch_integration
           shell: bash
           run: |
            echo " workspace is ${GITHUB_WORKSPACE} "
