@@ -25,4 +25,7 @@
 		<javac srcdir="${src.dir}" destdir="${bin.dir}" classpathref="classpath" />
 	</target>
 
+	<target name="all" depends="init,clean,compile">
+        </target>
+
 </project>
