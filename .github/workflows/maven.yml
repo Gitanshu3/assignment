@@ -33,6 +33,7 @@ jobs:
           ref: ${{ env.BACKEND_BRANCH }}
           fetch-depth: 0
           path: Integration/branch_integration/
+          
       - name: Print Directory
         run: echo "github workplace one ${GITHUB_WORKSPACE}" 
 
@@ -94,6 +95,7 @@ jobs:
     
         - name: run ant build
           run: |
+           echo "catalina base is ${$CATALINA_BASE}"
            echo " workspace is ${GITHUB_WORKSPACE} "
            echo " This repo is ${{ github.repository }} .. "
            ant all -Dyourchoice=4 -DbambooBuildNumber=${{github.run_number}} -DMOBILE_BUILD_SKIP=true -v -verbose 
