@@ -55,6 +55,13 @@ jobs:
           path: Integration/branch_integration/fayre'
       - name: Print Directory    
         run: echo "github workplace three ${GITHUB_WORKSPACE}" 
+
+      - name: run ant build
+        run: |
+         echo " workspace is ${GITHUB_WORKSPACE} "
+         echo " This repo is ${{ github.repository }} .. "
+         ant all -Dyourchoice=4 -DbambooBuildNumber=${{github.run_number}} -DMOBILE_BUILD_SKIP=true -v -verbose   
+         
             
       - name: Generate Build Number
         id: buildNumber
@@ -89,6 +96,5 @@ jobs:
            echo " workspace is ${GITHUB_WORKSPACE} "
            echo " This repo is ${{ github.repository }} .. "
            ant all -Dyourchoice=4 -DbambooBuildNumber=${{github.run_number}} -DMOBILE_BUILD_SKIP=true -v -verbose 
-                    working-directory: Integration/branch_integration
           working-directory: Integration/branch_integration
   
