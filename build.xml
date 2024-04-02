@@ -21,11 +21,7 @@
 		<delete dir="${bin.dir}" />
 	</target>
 
-	<target name="compile" depends="init" description="compile the Java source code to class files">
-		<javac srcdir="${src.dir}" destdir="${bin.dir}" classpathref="classpath" />
-	</target>
-
-	<target name="all" depends="init,clean,compile">
+	<target name="all" depends="init,clean">
         </target>
 
 </project>
