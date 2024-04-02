@@ -1,6 +1,7 @@
 name: github-pipeline
 on:
-  workflow_dispatch:
+  push: 
+   branches: [master]
 
 env:
   BACKEND_REPO: 'Gitanshu3/assignment'
@@ -81,6 +82,7 @@ jobs:
             distribution: 'temurin'
     
         - name: run ant build
+          working-directory: ${GITHUB_WORKSPACE}
           shell: bash
           run: |
            echo " workspace is ${GITHUB_WORKSPACE} "
