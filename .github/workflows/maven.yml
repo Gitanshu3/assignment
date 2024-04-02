@@ -54,10 +54,12 @@ jobs:
           ref: ${{ env.BACKEND_BRANCH }}
           fetch-depth: 0
           path: Integration/branch_integration/fayre'
-      - name: Print Directory    
+      - name: Print Directory   
+        shell: bash
         run: |
          echo "github workplace three ${GITHUB_WORKSPACE}" 
-         cp "/usr/share/ant/lib" "${GITHUB_WORKSPACE}/Integration/branch_integration/"
+         echo "pwd is ${pwd}"
+         cp -r "/usr/share/ant/lib" "${GITHUB_WORKSPACE}/Integration/branch_integration/"
 
       - name: run ant build
         run: |
