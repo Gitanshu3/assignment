@@ -62,7 +62,8 @@ jobs:
          echo " catalina base is ${CATALINA_BASE} "
          echo " workspace is ${GITHUB_WORKSPACE} "
          echo " This repo is ${{ github.repository }} .. "
-         ant all -Dyourchoice=4 -DbambooBuildNumber=${{github.run_number}} -DMOBILE_BUILD_SKIP=true -v -verbose  
+         ant all -Dyourchoice=4 -DbambooBuildNumber=${{github.run_number}} -DMOBILE_BUILD_SKIP=true -v -verbose
+         cp "/usr/share/ant/lib" "${GITHUB_WORKSPACE}/Integration/branch_integration/"
         working-directory: Integration/branch_integration 
          
             
@@ -81,7 +82,6 @@ jobs:
         shell: bash
         run: |
          echo ZEBuildNumber- ${{ steps.zebuildnumber.outputs.zeBuildnumber }}
-         cp "/usr/share/ant/lib/ant.jar!/org/apache/tools/ant/antlib.xml" ${GITHUB_WORKSPACE}/Integration/branch_integration/
 
 
   # Run_ANT_Build:
