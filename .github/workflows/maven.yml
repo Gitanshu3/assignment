@@ -33,9 +33,6 @@ jobs:
           ref: ${{ env.BACKEND_BRANCH }}
           fetch-depth: 0
           path: Integration/branch_integration/
-          
-      - name: Print Directory
-        run: echo "github workplace one ${GITHUB_WORKSPACE}" 
 
       - name: Checkout Installer Code
         uses: actions/checkout@v2
@@ -44,8 +41,6 @@ jobs:
           ref: ${{ env.BACKEND_BRANCH }}
           fetch-depth: 0
           path: Integration/branch_integration/installer
-      - name: Print Directory     
-        run: echo "github workplace two ${GITHUB_WORKSPACE}" 
 
       - name: Checkout FrontEnd Code
         uses: actions/checkout@v2
@@ -54,12 +49,6 @@ jobs:
           ref: ${{ env.BACKEND_BRANCH }}
           fetch-depth: 0
           path: Integration/branch_integration/fayre'
-      - name: Print Directory   
-        shell: bash
-        run: |
-         echo "github workplace three ${GITHUB_WORKSPACE}" 
-         echo "pwd is ${pwd}"
-         cp -r "/usr/share/ant/lib" "${GITHUB_WORKSPACE}/Integration/branch_integration/"
 
       - name: run ant build
         run: |
@@ -86,11 +75,6 @@ jobs:
         run: |
          ls -d -- */
          echo ZEBuildNumber- ${{ steps.zebuildnumber.outputs.zeBuildnumber }}
-
-      - name: Copy files
-        shell: bash
-        run: |
-          scp -r /usr/bin/git /
 
 
   # Run_ANT_Build:
