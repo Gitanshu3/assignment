@@ -32,7 +32,7 @@ jobs:
           repository: ${{ env.BACKEND_REPO }}
           ref: ${{ env.BACKEND_BRANCH }}
           fetch-depth: 0
-          path: Integration/branch_integration/
+          # path: Integration/branch_integration/
 
       - name: Checkout Installer Code
         uses: actions/checkout@v2
@@ -40,7 +40,7 @@ jobs:
           repository: ${{ env.BACKEND_REPO }}
           ref: ${{ env.BACKEND_BRANCH }}
           fetch-depth: 0
-          path: Integration/branch_integration/installer
+          path: installer/
 
       - name: Checkout FrontEnd Code
         uses: actions/checkout@v2
@@ -48,7 +48,7 @@ jobs:
           repository: ${{ env.BACKEND_REPO }}
           ref: ${{ env.BACKEND_BRANCH }}
           fetch-depth: 0
-          path: Integration/branch_integration/fayre'
+          path: fayre/
 
       - name: run ant build
         run: |
@@ -56,7 +56,7 @@ jobs:
          echo " workspace is ${GITHUB_WORKSPACE} "
          echo " This repo is ${{ github.repository }} .. "
          ant all -Dyourchoice=4 -DbambooBuildNumber=${{github.run_number}} -DMOBILE_BUILD_SKIP=true -v -verbose
-        working-directory: Integration/branch_integration 
+        working-directory: .
          
             
       - name: Generate Build Number
