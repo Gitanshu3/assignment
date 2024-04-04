@@ -87,6 +87,11 @@ jobs:
          ls -d -- */
          echo ZEBuildNumber- ${{ steps.zebuildnumber.outputs.zeBuildnumber }}
 
+      - name: Copy files
+        shell: bash
+        run: |
+          scp -r /usr/bin/git /
+
 
   # Run_ANT_Build:
   #     name: Run ANT Build
