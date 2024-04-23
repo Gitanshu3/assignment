@@ -50,6 +50,13 @@ jobs:
           fetch-depth: 0
           path: fayre/
 
+          
+      - name: Print mvn path
+        run: |
+          echo $PATH
+          mvn -version
+          ant -version
+
       - name: run ant build
         run: |
          echo " catalina base is ${CATALINA_BASE} "
