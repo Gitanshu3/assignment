@@ -14,14 +14,14 @@ jobs:
   Git_Pulls:
       name: Git Pulls Backend repository
       runs-on: ubuntu-latest
-      
       steps:
-      - name: Get StartTimestamp
-        id: start
-        run: echo "STARTTIMESTAMP=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_OUPUT
+      
+      - name: Get current date
+        id: date
+        run: echo "STARTTIMESTAMP=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
         
-      - name: Print StartTimestamp
-        run: echo ${{ steps.start.outputs.STARTTIMESTAMP }} and ${{github.run_number}}
+      - name: Echo current date
+        run: echo $STARTTIMESTAMP and ${{github.run_number}}
         
       - name: Checkout BackEnd Code
         uses: actions/checkout@v2
