@@ -81,6 +81,12 @@ jobs:
          echo ZEBuildNumber- ${{ steps.zebuildnumber.outputs.zeBuildnumber }}
          echo gitSha - ${{steps.zebuildnumber.outputs.gitSha}}
 
+      - name: Get end date
+        run: echo "ENDTIMESTAMP=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
+        
+      - name: Echo end date
+        run: echo $ENDTIMESTAMP and ${{github.run_number}}    
+
 
   # Run_ANT_Build:
   #     name: Run ANT Build
