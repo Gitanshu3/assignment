@@ -49,7 +49,6 @@ jobs:
           ref: ${{ env.BACKEND_BRANCH }}
           fetch-depth: 0
           path: fayre/
-
           
       - name: Print mvn path
         run: |
@@ -75,6 +74,7 @@ jobs:
         id: zebuildnumber
         shell: bash
         run: |
+         echo "##[set-output name=gitSha;]$(git rev-parse origin/${{ env.BACKEND_BRANCH }})"
          echo "zeBuildnumber=$(echo ${{ env.INSTALLER_BRANCH }} | cut -d'_' -f2)_${{ steps.buildNumber.outputs.gitBuildnumber }}" >> $GITHUB_OUTPUT
       
       - name: Print ZEBuildNumber
@@ -82,6 +82,7 @@ jobs:
         run: |
          ls -d -- */
          echo ZEBuildNumber- ${{ steps.zebuildnumber.outputs.zeBuildnumber }}
+         echo gitSha - ${{steps.zebuildnumber.outputs.gitSha}}
 
 
   # Run_ANT_Build:
