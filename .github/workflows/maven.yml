@@ -18,10 +18,10 @@ jobs:
       steps:
       - name: Get StartTimestamp
         id: current_date
-        run: echo "STARTTIMESTAMP=$(current_date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
+        run: echo "STARTTIMESTAMP=$(current_date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_OUPUT
         
       - name: Print StartTimestamp
-        run: echo ${{ env.STARTTIMESTAMP }} and ${{github.run_number}}
+        run: echo ${{ steps.current_date.STARTTIMESTAMP }} and ${{github.run_number}}
         
       - name: Checkout BackEnd Code
         uses: actions/checkout@v2
