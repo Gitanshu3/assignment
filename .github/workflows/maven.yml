@@ -93,4 +93,4 @@ jobs:
     if: always() && (needs.Git_Pulls.result == 'success')
     steps:
      - name: Test Output
-       run: echo ${{ echo ${{ needs.Git_Pulls.steps.buildNumber.outputs.gitBuildnumber }} }}
+       run: echo $( echo ${{ needs.Git_Pulls.steps.buildNumber.outputs.gitBuildnumber }} )
